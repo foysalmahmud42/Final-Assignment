@@ -4,6 +4,7 @@ const mealDetailsContent = document.querySelector('.meal-details-content');
 const recipeCloseBtn = document.getElementById('recipe-close-btn');
 const homeButton = document.getElementById('home');
 const mealCategory = document.getElementById('mealMain');
+const url = `https://www.themealdb.com/api/json/v1/1/categories.php`;
 
 // event listeners
 
@@ -17,7 +18,7 @@ recipeCloseBtn.addEventListener('click', () => {
     mealDetailsContent.parentElement.classList.remove('showRecipe');
 });
 function getAllMeal(){
-    fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`)
+    fetch(url)
     .then(response => response.json())
     .then(data => {
         // console.log(data);
@@ -26,64 +27,60 @@ function getAllMeal(){
             html += `
                 <div class = "meal-item" data-id = "${mealAll.idCategory}">
                     <div class = "meal-img">
-                        <img src = "${mealAll .strCategoryThumb}" alt = "food">
+                        <img src = "${mealAll.strCategoryThumb}" alt = "food">
                     </div>
                     <div class = "meal-name">
-                            <h3>${mealAll .strCategory}</h3>
+                            <h3>${mealAll.strCategory}</h3>
                             <a href = "#" class = "view-btn">View All</a>
                     </div>
                     <div class = "meal-detail">
-                        <p>${mealAll .strCategoryDescription}</p>
+                        <p>${mealAll.strCategoryDescription}</p>
                     </div>
                 </div>
             `;
             });
+        mealList.classList.remove('notFound');
         mealList.innerHTML = html;
     });    
 }
 getAllMeal();
 
-function getRecipe(e){
+async function getRecipe(e){
     e = e || window.event;
     var target = e.target || e.srcElement;
     e.preventDefault();
     if(target.classList.contains('view-btn')){
         let mealItem = target.parentElement.parentElement;
-        var id = parseInt(mealItem.dataset.id);
-        fetch(`https:www.themealdb.com/api/json/v1/1/categories.php`)
-        .then(response => response.json())
-        .then(data => showByCategory(data, id));   
+        var id = parseInt(mealItem.dataset.id) - 1;
+        const response = await fetch(url);
+        var data = await response.json();
+        var name = data.categories[id].strCategory;
+        showByCategory(name);  
     }
 }
-function showByCategory(data, id){
-    console.log(data.categories[id-1].strCategory);
-    fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${data.categories[id-1].strCategory}`)
-    .then(response => response.json())
-    .then(data => {
-        // console.log(data);
-        let html = "";
-        if(data.meals){
-            data.meals.forEach(meal => {
+async function showByCategory(data){
+
+
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${data}`);
+    var data = await response.json();
+    console.log(data)
+    let html = "";
+    for (let r of data.meals){ 
                 html += `
-                    <div class = "meal-item" data-id = "${meal.idMeal}">
+                    <div class = "meal-item" data-id = "${r.idMeal}">
                         <div class = "meal-img">
-                            <img src = "${meal.strMealThumb}" alt = "food">
+                            <img src = "${r.strMealThumb}" alt = "food">
                         </div>
                         <div class = "meal-name">
-                            <h3>${meal.strMeal}</h3>
+                            <h3>${r.strMeal}</h3>
                             <a href = "#" class = "recipe-btn">Get Recipe</a>
                         </div>
                     </div>
                 `;
-            });
             mealList.classList.remove('notFound');
-        } else{
-            html = "Sorry, we didn't find any meal!";
-            mealList.classList.add('notFound');
-        }
+        };
         mealList.innerHTML = html;
-    });
-}
+    }
 
 // get meal list that matches with the ingredients
 function getMealList(){
