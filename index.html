@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="icon" type = "image/x-icon" href="images/fav.png">
+    <title>Tummy Delight</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-md 
+            fixed-top nav-items-color">
+            <div class="container-fluid">
+                <nav class="navbar ">
+                    <a class="navbar-brand nav-items-color" href='#'>
+                      <img src="images/navbar.png" width="30" height="30" class="d-inline-block align-top" alt="Site logo" >
+                      Tummy Delight
+                    </a>
+                </nav>
+            <button class="navbar-toggler ml-auto custom-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <button class="navbar-brand nav-items-color" id="home">Home</button>
+                </li>   
+                </ul>
+            </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class = "container">
+            <div class = "meal-wrapper">
+              <div class = "meal-search">
+                <h2 class = "title">Treat Yourself</h2>
+                <blockquote>Good food is the foundation for happiness<br>
+                  <cite>- Auguste Escoffier</cite>
+                </blockquote>
+        
+                <div class = "meal-search-box">
+                  <input type = "text" onfocus="this.value=''" class = "search-control" placeholder="What Type of food you will have Today" id = "search-input">
+                  <button type = "submit" class = "search-btn btn" id = "search-btn">
+                    <i class = "fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+
+            <div id= "mealMain">
+                <div id= "meal">
+                </div>
+            </div>
+              
+            <div class = "meal-result">
+                <div id= "meal">
+
+                </div>
+              </div>
+        
+            <div class = "meal-details">
+                <button type = "button" class = "btn recipe-close-btn" id = "recipe-close-btn">
+                  <i class = "fas fa-times"></i>
+                </button>
+        
+                <div class = "meal-details-content">
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+<footer class="text-center text-lg-start text-muted" style = "background-color: #343a40; color: #d65108 !important;">
+    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+      2021 Copyright :
+      <a class="text-reset fw-bold" href="https://facebook.com/foysal42/" style="text-decoration: none; ">&copy 1730150 </a>
+       All Rights Reserved
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!-- Footer -->
+
+
+
+
+
+
+    <script src="js/bootstrap.js"></script>
+    <script src="js/bootstrap.esm.min.js"></script>
+    <script src="api/api.js"></script>
+</body>
+</html>
